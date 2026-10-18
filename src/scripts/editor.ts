@@ -79,7 +79,7 @@ function updateDetails() {
   const count = body.value.trim() ? body.value.trim().split(/\s+/u).length : 0;
   $('word-count').textContent = `${count} ${count === 1 ? 'word' : 'words'}`;
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  $('timezone').textContent = `${zone} · your local time.`;
+  $('timezone').textContent = `it's in your local time (${zone}).`;
   $('permalink-preview').textContent = permalink.value || 'little-observations';
   datetime.setCustomValidity(epochFromLocal(datetime.value) === null ? 'choose a valid local date and time (2001–2286).' : '');
 }

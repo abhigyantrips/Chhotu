@@ -17,7 +17,7 @@ export default defineConfig({
     experimental: { directoryAndTrailingSlashHandler: true },
     manifest: {
       id: '/', name: 'chhotu', short_name: 'chhotu',
-      description: 'a little place to put words into the world.',
+      description: 'a little helper to help me with website shenanigans.',
       start_url: '/', scope: '/', display: 'standalone',
       background_color: '#1d2021', theme_color: '#1d2021',
       icons: [
