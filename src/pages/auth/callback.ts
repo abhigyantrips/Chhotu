@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
-import { configured, consumeOAuth, setSession, validTokens } from "../../lib/auth";
+import { clearSession, configured, consumeOAuth, setSession, validTokens } from "../../lib/auth";
 import { OWNER, OWNER_ID } from "../../lib/config";
 import { github } from "../../lib/github";
 
@@ -33,8 +33,10 @@ export const GET: APIRoute = async (context) => {
 		)
 			return context.redirect("/login?error=failed");
 		const user = await github<{ id: number; login: string }>(data.access_token, "/user");
-		if (user.id !== OWNER_ID || user.login !== OWNER)
-			return context.redirect("/login?error=denied");
+		if (user.id !== OWNER_ID || user.login !== OWNER) {
+			clearSession(context);
+			return context.redirect("https://www.youtube.com/watch?v=cw9FIeHbdB8");
+		}
 		await setSession(context, env, data.access_token, data);
 		return context.redirect("/snippets");
 	} catch {

@@ -3,40 +3,36 @@ import Layout from "../layouts/Layout.astro";
 export const prerender = true;
 ---
 
-<Layout title="come on in. | chhotu" home>
+<Layout title="is it really you? | chhotu" home>
 	<main class="home-main flex flex-col items-center justify-center gap-8 p-6" id="main-content">
-		<span
-			class="icon size-12 -rotate-12 text-(--color-accent)"
-			style="--icon-url: url(/icons/photo.svg)"
-			aria-hidden="true"></span>
 		<div class="text-center">
-			<h1 class="text-3xl font-semibold">come on in.</h1>
-			<p class="mt-3 text-(--color-text-muted)">a little place to put words into the world.</p>
+			<h1 class="text-3xl font-semibold">is it really you?</h1>
+			<p class="mt-3 text-(--color-text-muted)">i have minor trust issues.</p>
 		</div>
-		<a href="/auth/login" class="button button-primary"
-			>sign in with GitHub <span aria-hidden="true">↗</span></a
-		>
+		<a href="/auth/login" class="button button-primary">sign into github</a>
 		<p
 			id="login-message"
 			class="max-w-sm text-center text-sm text-(--color-text-muted)"
 			role="status"
+			hidden
 		>
-			just for you, @abhigyantrips.
 		</p>
 		<a href="/" class="text-sm text-(--color-text-muted) underline underline-offset-3"
-			>back to choose.</a
+			>wanna go back home?</a
 		>
 	</main>
 	<script>
 		const messages: Record<string, string> = {
-			denied: "this little corner is only for @abhigyantrips. try your other account.",
 			cancelled: "sign-in was cancelled. give it another go when you’re ready.",
 			expired: "that sign-in expired. try again.",
 			failed: "GitHub sign-in couldn’t finish. please try again.",
 			setup: "GitHub sign-in needs its one-time setup. see the README in Chhotu.",
 		};
 		const error = new URLSearchParams(location.search).get("error");
-		if (error && messages[error])
-			document.querySelector("#login-message")!.textContent = messages[error];
+		if (error && messages[error]) {
+			const message = document.querySelector<HTMLParagraphElement>("#login-message")!;
+			message.textContent = messages[error];
+			message.hidden = false;
+		}
 	</script>
 </Layout>
