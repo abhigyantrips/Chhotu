@@ -96,10 +96,8 @@ function updateState() {
 	publish.disabled = busy || !authenticated || !navigator.onLine || !head;
 	$("sign-out").hidden = !authenticated;
 	$("auth-notice").hidden = authenticated;
-	if (!navigator.onLine) status.textContent = "offline. keep writing; publish when you’re back.";
-	else if (authenticated && head) status.textContent = "ready when you are.";
-	else if (authenticated) status.textContent = "refresh collections to get ready.";
-	else status.textContent = "your words can start here.";
+	status.hidden = navigator.onLine;
+	status.textContent = navigator.onLine ? "" : "offline. keep writing; publish when you’re back.";
 }
 function updateNewFields() {
 	const isNew = collection.value === "__new__";
@@ -215,9 +213,6 @@ async function connect() {
 		const session = await sessionStatus();
 		authenticated = session.authenticated;
 		if (authenticated) await loadCollections();
-		else if (!session.configured)
-			$("auth-message").textContent =
-				"GitHub sign-in needs its one-time setup. you can try the editor and save a draft meanwhile.";
 	} catch (error) {
 		head = "";
 		if (error instanceof RequestError && error.status === 401) authenticated = false;
@@ -403,7 +398,6 @@ form.addEventListener("submit", async (event) => {
 		} catch {
 			head = "";
 			$("refresh-collections").hidden = false;
-			status.textContent = "published. refresh collections before the next one.";
 		}
 		success.scrollIntoView({ behavior: "smooth", block: "nearest" });
 	} catch (error) {
