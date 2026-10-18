@@ -1,33 +1,42 @@
 ---
-import { Font } from 'astro:assets';
-import { pwaInfo } from 'virtual:pwa-info';
-import '../styles/global.css';
-interface Props { title: string; home?: boolean }
+import { Font } from "astro:assets";
+import { pwaInfo } from "virtual:pwa-info";
+import "../styles/global.css";
+interface Props {
+	title: string;
+	home?: boolean;
+}
 const { title, home = false } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#1d2021" />
-    <meta name="description" content="a little place to put words into the world." />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="chhotu" />
-    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
-    <link rel="icon" type="image/svg+xml" href="/pwa/icon.svg" />
-    <link rel="apple-touch-icon" href="/pwa/apple-touch-icon.png" />
-    <Font cssVariable="--font-gummy" />
-    <title>{title}</title>
-  </head>
-  <body class:list={["font-gummy relative min-h-svh", { 'home': home }]}>
-    <a href="#main-content" class="skip-link" hidden={home}>skip to writing</a>
-    <slot />
-    <footer class:list={["site-footer flex items-center justify-center px-6 py-6 text-xl text-(--color-text-muted)", { 'home-footer': home }]}>
-      <a href="https://abhi.now" class="hover:text-(--color-text)">abhi.now</a>
-    </footer>
-    <script src="../scripts/pwa.ts"></script>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="theme-color" content="#1d2021" />
+		<meta name="description" content="a little place to put words into the world." />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="chhotu" />
+		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+		<link rel="icon" type="image/svg+xml" href="/pwa/icon.svg" />
+		<link rel="apple-touch-icon" href="/pwa/apple-touch-icon.png" />
+		<Font cssVariable="--font-gummy" />
+		<title>{title}</title>
+	</head>
+	<body class:list={["font-gummy relative min-h-svh", { home: home }]}>
+		<a href="#main-content" class="skip-link" hidden={home}>skip to writing</a>
+		<slot />
+		<footer
+			class:list={[
+				"site-footer flex items-center justify-center px-6 py-6 text-xl text-(--color-text-muted)",
+				{ "home-footer": home },
+			]}
+		>
+			<a href="https://abhi.now" class="hover:text-(--color-text)">abhi.now</a>
+		</footer>
+		<script src="../scripts/pwa.ts"></script>
+	</body>
 </html>
