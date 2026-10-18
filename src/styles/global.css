@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme { --font-gummy: var(--font-gummy); }
+:root {
+  color-scheme: dark;
+  --color-bg: #1d2021;
+  --color-text: #ebdbb2;
+  --color-text-muted: #a89984;
+  --color-accent: #a8c44a;
+  --color-danger: #fb4934;
+}
+html { background: var(--color-bg); }
+body { color: var(--color-text); }
+button, input, textarea, select { font: inherit; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button, select { cursor: pointer; }
+button:disabled { cursor: wait; opacity: .5; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+::selection { background: #a8c44a45; }
+[hidden] { display: none !important; }
+.icon { display: inline-block; flex-shrink: 0; background: currentColor; mask: var(--icon-url) no-repeat center / contain; -webkit-mask: var(--icon-url) no-repeat center / contain; }
+.home-main { min-height: calc(100svh - 4.75rem); }
+.home-footer { position: absolute; bottom: 0; left: 0; right: 0; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+.route-link { transition: color .15s; }
+.route-link:hover { color: var(--color-accent); }
+.route-link:hover .icon { animation: doodle-wobble 3.33s steps(1) infinite; }
+.site-footer { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 10; background: var(--color-bg); padding: .75rem; }
+.skip-link:focus { top: 1rem; }
+.editor-width { max-width: 48rem; margin-inline: auto; padding-inline: 1.25rem; }
+.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .5rem; padding: .625rem 1rem; background: color-mix(in srgb, var(--color-text) 10%, transparent); transition: background .15s; }
+.button:hover { background: color-mix(in srgb, var(--color-text) 18%, transparent); }
+.button-primary { background: var(--color-accent); color: var(--color-bg); font-weight: 600; }
+.button-primary:hover { background: #bbd469; }
+.field { display: block; width: 100%; min-height: 48px; border-radius: .5rem; border: 1px solid #a899844d; background: #ebdbb20a; padding: .75rem; color: var(--color-text); }
+.field:focus { border-color: var(--color-accent); }
+.field::placeholder { color: #a8998499; }
+.field-label { display: block; color: var(--color-text-muted); margin-bottom: .5rem; }
+.notice { padding: 1rem; border-radius: .5rem; background: #ebdbb212; color: var(--color-text-muted); }
+.notice a { text-decoration: underline; text-underline-offset: 3px; }
+.error { color: #fb8c75; }
+.prose { --tw-prose-body: var(--color-text); --tw-prose-headings: var(--color-text); --tw-prose-links: var(--color-text); --tw-prose-bold: var(--color-text); --tw-prose-quotes: #ebdbb2bf; --tw-prose-quote-borders: var(--color-text); --tw-prose-code: var(--color-text); --tw-prose-counters: var(--color-text-muted); --tw-prose-bullets: var(--color-text-muted); max-width: none; overflow-wrap: anywhere; }
+.prose code::before, .prose code::after { content: none; }
+.prose :not(pre) > code { padding: .2em .4em; border-radius: .25rem; background: #96969633; font-size: .85em; font-weight: 500; }
+.prose blockquote p:first-of-type::before, .prose blockquote p:last-of-type::after { content: none; }
+.prose a { text-underline-offset: 3px; }
+.prose img { border-radius: .5rem; }
+.prose pre { max-width: 100%; overflow-x: auto; background: #141617; }
+@media (min-width: 768px) { .home-main { min-height: 100svh; } }
+@media (max-width: 767px) { .route-link { color: var(--color-accent); } }
+@keyframes doodle-wobble { 0%,100% { transform: rotate(2deg); } 14% { transform: rotate(-5deg); } 28% { transform: rotate(4deg); } 42% { transform: rotate(-3deg); } 57% { transform: rotate(6deg); } 71% { transform: rotate(-4deg); } 85% { transform: rotate(5deg); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
