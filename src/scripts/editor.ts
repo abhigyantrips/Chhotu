@@ -95,7 +95,7 @@ function showError(message: string, link?: string) {
 function updateState() {
 	publish.disabled = busy || !authenticated || !navigator.onLine || !head;
 	$("sign-out").hidden = !authenticated;
-	$("auth-notice").hidden = authenticated;
+	$("sign-in").hidden = authenticated;
 	status.hidden = navigator.onLine;
 	status.textContent = navigator.onLine ? "" : "offline. keep writing; publish when you’re back.";
 }

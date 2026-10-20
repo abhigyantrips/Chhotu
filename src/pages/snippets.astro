@@ -10,12 +10,14 @@ export const prerender = true;
 				>new snippet.</span
 			></a
 		>
-		<button
-			type="button"
-			id="sign-out"
-			class="text-sm text-(--color-text-muted) underline underline-offset-3"
-			hidden>sign out</button
+		<div
+			class="grid h-5 w-16 shrink-0 items-center justify-items-end text-sm text-(--color-text-muted)"
 		>
+			<a href="/login" id="sign-in" class="underline underline-offset-3">sign in</a>
+			<button type="button" id="sign-out" class="underline underline-offset-3" hidden
+				>sign out</button
+			>
+		</div>
 	</header>
 	<main class="editor-width min-h-[calc(100svh-11rem)] pt-6 pb-16 md:pt-12" id="main-content">
 		<h1 class="sr-only">new snippet.</h1>
@@ -26,9 +28,6 @@ export const prerender = true;
 			class="mb-6 block text-sm text-(--color-text-muted) underline underline-offset-3"
 			hidden>install chhotu ↙</button
 		>
-		<div id="auth-notice" class="notice mb-6" hidden>
-			you have to be <a href="/login">signed in</a> to do things.
-		</div>
 		<div id="success" class="notice mb-6" role="status" hidden></div>
 		<form id="snippet-form" class="flex flex-col gap-7">
 			<div>
